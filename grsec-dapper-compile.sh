@@ -117,7 +117,7 @@ if [ -n "$2" ]
 fi
 echo "Give the name of the (old) config file (that we need to get) usually from"
 echo "the last compile, from www.croatiafidelis.hr/gnu/deb/, no extension,"
-echo "such as: config-4.9.74-unofficial+grsec180216-23 (if no other talk on my"
+echo "such as: config-4.9.50-unofficial+grsec (if no other talk on my"
 echo "Debian/Devuan Grsec tips page on this, then just try and choose the"
 echo "latest available)"
 if [ -n "$3" ]
@@ -152,17 +152,17 @@ if [ -e "$grsec.patch" ]; then
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
-		wget -nc \
+		torsocks wget -nc \
 			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch
-		wget -nc \
+		torsocks wget -nc \
 			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch.sig
 	else
 		echo # do nothing
 	fi
 else
-	wget -nc \
+	torsocks wget -nc \
 		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch
-	wget -nc \
+	torsocks wget -nc \
 		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch.sig
 fi
 if [ -e "$kernel.tar.xz" ]; then 
@@ -171,14 +171,14 @@ if [ -e "$kernel.tar.xz" ]; then
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
-		wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.xz
-		wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.sign
+		torsocks wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.xz
+		torsocks wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.sign
 	else
 		echo # do nothing
 	fi
 else
-	wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.xz
-	wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.sign
+	torsocks wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.xz
+	torsocks wget -nc https://www.kernel.org/pub/linux/kernel/v4.x/$kernel.tar.sign
 fi
 if [ -e "$config.gz" ]; then 
 	echo "$config.gz there, but if you want to redownload it for"
@@ -186,18 +186,18 @@ if [ -e "$config.gz" ]; then
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
-		wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.sig
-		wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.gz
+		torsocks wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.sig
+		torsocks wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.gz
 	else
 		echo # do nothing
 	fi
 else
-	wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.sig
-	wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.gz
+	torsocks wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.sig
+	torsocks wget -nc https://www.croatiafidelis.hr/gnu/deb/$config.gz
 fi
 
 echo ; echo "Import the necessary keys:"
-echo "Matthew Ruffell signs the dapper-secure-kernel patch."
+echo "Matthew Ruffell signs the unofficial_grsec."
 echo "The integrity is verified by checking the git archive where he signs tags."
 # But we only need to get the key if we don't already have it, right?
 gpg --quiet --list-key 0xB3FE58828237090D
@@ -278,19 +278,19 @@ echo ; echo cd $kernel;
                 read FAKE ; 
         cd $kernel
 pwd
-echo ; echo "Here we modify the LOCALVERSION variable to be -YYMMDD-HH"
-locver=`date +%y%m%d-%H`
-echo $locver
-read FAKE ;
-oldloc=`grep CONFIG_LOCALVERSION= .config|cut -d'"' -f2`
-echo sed -i.bak "s/$oldloc/$locver/" .config
-read FAKE ;
-sed -i.bak "s/$oldloc/$locver/" .config
-echo ; echo "And we need to check that we did what we meant:"
-echo ; 
-grep LOCALVERSION .config
-echo ; echo "And we can also move the backup out of way if it went well."
-mv -vi .config.bak ../ ;
+#echo ; echo "Here we modify the LOCALVERSION variable to be -YYMMDD-HH"
+#locver=`date +%y%m%d-%H`
+#echo $locver
+#read FAKE ;
+#oldloc=`grep CONFIG_LOCALVERSION= .config|cut -d'"' -f2`
+#echo sed -i.bak "s/$oldloc/$locver/" .config
+#read FAKE ;
+#sed -i.bak "s/$oldloc/$locver/" .config
+#echo ; echo "And we need to check that we did what we meant:"
+#echo ; 
+#grep LOCALVERSION .config
+#echo ; echo "And we can also move the backup out of way if it went well."
+#mv -vi .config.bak ../ ;
 echo ; echo make menuconfig;
                 read FAKE ; 
 echo "If here you will see the script complaining, such as:"
@@ -352,5 +352,5 @@ echo "And then, if no errors there, you can reboot."
 echo "Upon rebooting, you too should get something like I got below:"
 echo
 echo "$ uname -a"
-echo "... (haven't managed to compile it yet)"
+echo "4.9.50-unofficial+grsec-170916-20"
 echo "$"
