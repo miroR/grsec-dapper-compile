@@ -19,7 +19,7 @@
 # you encounter problems, modify for your needs. Also, pls. report errors on
 # Debian/Devuan Forums where I made the Tips page:
 # "Grsecurity/Pax installation on Debian/Devuan GNU/Linux" (on Debian Forums,
-# and same/similar title I'll gave it on dev1galaxy.org Devuan Forums, pls. see
+# and same/similar title I gave it on dev1galaxy.org Devuan Forums, pls. see
 # README.md) but pls. if you will be waiting for my replies, it could take days
 # and longer sometimes. Thank you!
 #
@@ -67,7 +67,7 @@ echo "but pls. you make sure that nothing in them obstructs this script,"
 echo "meaning, we'll run command:" 
 echo "'mkdir -pv /home/$user/dLo/ /home/$user/src/'"
 echo ""
-echo "WARNING: If you don't have at least around 15GB free in your"
+echo "WARNING: If you don't have at least around 18GB free in your"
 echo "homedir, you need to modify the script or arrange in some other way such"
 echo "as to make the /home/$user/src a symlink to somewhere with enough room"
 echo "for the compilation"
@@ -117,7 +117,7 @@ if [ -n "$2" ]
 fi
 echo "Give the name of the (old) config file (that we need to get) usually from"
 echo "the last compile, from www.croatiafidelis.hr/gnu/deb/, no extension,"
-echo "such as: config-4.9.74-unofficial+grsec180216-23 (if no other talk on my"
+echo "such as: config-4.9.92-dappersec180601-06 (if no other talk on my"
 echo "Debian/Devuan Grsec tips page on this, then just try and choose the"
 echo "latest available)"
 if [ -n "$3" ]
@@ -136,7 +136,7 @@ echo "The command line you would type to do this first stretch faster would be"
 echo "similar to this one:"
 echo ""
 echo "grsec-dapper-compile.sh dapper-secure-kernel-patchset-4.9.92-2018-05-27 linux-4.9.92 \\"
-echo "    config-4.9.74-unofficial+grsec180216-23"
+echo "    config-4.9.92-dappersec180601-06"
 echo ""
 echo "grsec-dapper-compile.sh $grsec $kernel $config"
 echo ""
@@ -352,5 +352,5 @@ echo "And then, if no errors there, you can reboot."
 echo "Upon rebooting, you too should get something like I got below:"
 echo
 echo "$ uname -a"
-echo "... (haven't managed to compile it yet)"
+echo "4.9.92-dappersec180601-06"
 echo "$"
