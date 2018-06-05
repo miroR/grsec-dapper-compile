@@ -146,9 +146,20 @@ echo "NOTE: In case you already did, you can use those previous downloads"
 grsec_dir=$(echo $grsec|sed 's/dapper-secure-kernel-patchset-\(.*\)-2018-[0-9][0-9]-[0-9][0-9].*/\1/');
 echo \$grsec_dir: $grsec_dir
                 read FAKE ;
+echo "pls. look up the full address of the patch. is there an \"a\" at the end of the substring"
+echo "after the version of the kernel (such as 4.9.92) btwn two slashes, such as 4.9.92a?"
+echo "(it sometimes happens to be when the patch gets fixed after being tested)"
+echo "If so, say y/Y now."
+ask;
+if [ "$?" == 0 ]; then
+	grsec_dir=${grsec_dir}a
+echo \$grsec_dir: $grsec_dir
+                read FAKE ;
+fi
 if [ -e "$grsec.patch" ]; then 
 	echo "$grsec.patch there, but if you want to redownload it for"
-	echo "some reason, type y/Y (will redownload the sig too), anything else"
+	echo "some reason (but make sure you move/remove it then),"
+	echo "type y/Y (will redownload the sig too), anything else"
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
@@ -167,7 +178,8 @@ else
 fi
 if [ -e "$kernel.tar.xz" ]; then 
 	echo "$kernel.tar.xz there, but if you want to redownload it for"
-	echo "some reason, type y/Y (will redownload the sig too), anything else"
+	echo "some reason (but make sure you move/remove it then),"
+	echo "type y/Y (will redownload the sig too), anything else"
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
@@ -182,7 +194,8 @@ else
 fi
 if [ -e "$config.gz" ]; then 
 	echo "$config.gz there, but if you want to redownload it for"
-	echo "some reason, type y/Y (will redownload the sig too), anything else"
+	echo "some reason (but make sure you move/remove it then),"
+	echo "type y/Y (will redownload the sig too), anything else"
 	echo "moves you on"
 	ask;
 	if [ "$?" == 0 ]; then
