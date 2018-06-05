@@ -153,17 +153,17 @@ if [ -e "$grsec.patch" ]; then
 	ask;
 	if [ "$?" == 0 ]; then
 		wget -nc \
-			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch
+			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec_dir/$grsec.patch
 		wget -nc \
-			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch.sig
+			https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec_dir/$grsec.patch.sig
 	else
 		echo # do nothing
 	fi
 else
 	wget -nc \
-		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch
+		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec_dir/$grsec.patch
 	wget -nc \
-		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec-dir/$grsec.patch.sig
+		https://github.com/dapperlinux/dapper-secure-kernel-patchset-stable/releases/download/$grsec_dir/$grsec.patch.sig
 fi
 if [ -e "$kernel.tar.xz" ]; then 
 	echo "$kernel.tar.xz there, but if you want to redownload it for"
